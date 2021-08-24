@@ -9,9 +9,10 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {url 'https://developer.huawei.com/repo/'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:3.6.1'
     }
 }
 
@@ -45,6 +46,7 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven {url 'https://developer.huawei.com/repo/'}
 }
 
 
@@ -55,4 +57,9 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+
+    // Use the network request function of Network Kit.
+    implementation 'com.huawei.hms:network-embedded:5.0.3.300'
+    // Use the file upload and download functions of Network Kit.
+    implementation 'com.huawei.hms:filemanager:5.0.3.300'
 }

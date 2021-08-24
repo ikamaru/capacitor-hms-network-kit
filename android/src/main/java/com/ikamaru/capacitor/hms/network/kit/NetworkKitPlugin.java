@@ -9,14 +9,40 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "NetworkKit")
 public class NetworkKitPlugin extends Plugin {
 
-    private NetworkKit implementation = new NetworkKit();
-
+    private NetworkKit implementation;
+    @Override
+    public void load() {
+        super.load();
+        implementation = new NetworkKit(bridge.getActivity());
+    }
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void get(PluginCall call) {
+        String url = call.getString("url");
+        String endPoint = call.getString("endPoint");
+        String params = call.getString("params");
+        if(url==null || url.isEmpty() ){
+            call.reject("empty URL");
+            return;
+        }
+        if(endPoint==null || endPoint.isEmpty() ){
+            call.reject("empty EndPoint");
+            return;
+        }
+        if(params==null){
+            call.reject("empty Params");
+            return;
+        }
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+        implementation.get(url, endPoint, params, new NetworkKit.OnListener() {
+            @Override
+            public void onSuccess(JSObject jsonObject) {
+                call.resolve(jsonObject);
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                call.reject(exception.getMessage());
+            }
+        });
     }
 }

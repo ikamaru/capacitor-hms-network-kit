@@ -1,3 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ikamaru.capacitor.hms.network.kit">
+    <!--Permission to obtain the network status, which is used to check whether the current network connection is available.-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--Permission to access the Internet.-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--(Optional) Permission to obtain the Wi-Fi status, which is used to check the Wi-Fi connection status. If this permission is not declared, the network detection function of Network Kit will be affected.-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 </manifest>
