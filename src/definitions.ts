@@ -1,3 +1,4 @@
 export interface NetworkKitPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  echo(options: {url: string ,endPoint:string,params:string}): Promise<{ res: any }>;
+  
 }
